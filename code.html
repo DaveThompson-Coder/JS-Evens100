@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>EVENS-100: A Coding Project by Dave Thompson</title>
+    <title>Evens100: A Coding Project by Dave Thompson</title>
     <!-- ===== Required meta tags ===== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,7 +21,7 @@
     <!-- ===== Nav Section ===== -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/Favicon.png" class="d-inline-block align-text-top" width="30" height="24" > EVENS-100</a>
+            <a class="navbar-brand" href="#"><img src="img/Favicon.png" class="d-inline-block align-text-top" width="30" height="24" > Evens100</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -50,24 +50,87 @@
     <!-- ===== Main Section ===== -->
     <main class="flex-shrink-0">
        <div class="container py-4 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for my EVENS-100 App</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for my Evens100 App</h2>
             <div class="row row-cols-1 row-col-lg-2">
                 <div class="col-lg-8">
-                    <pre class="line-numbers"><code class=language-javascript">
-                        //Call Hello World
-                        function HelloWorld() {
-                            alert("Hello World");
-                        }
-                    </code>
+                    <pre class="line-numbers">
+                        <code class=language-javascript">
+                            // get the values from the page
+                            //Start or Controller function
+                            function getValues() {
+                                //get values from the page
+                                let startValue = document.getElementById("startValue").value;
+                                let endValue = document.getElementById("endValue").value;
+                            
+                                //Inputs MUST be Validated so you know they are integers!!
+                                //by using parse into Integers function
+                                startValue = parseInt(startValue);
+                                endValue = parseInt(endValue);
+                            
+                                if (Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                                    //call the generateNumbers function
+                                    let numbers = generateNumbers(startValue, endValue);
+                                    //call the displayNumbers function
+                                    displayNumbers(numbers);
+                                } else {
+                                    alert("You must enter integers");
+                                }
+                            }
+                            
+                            // generate numbers from the start value to the end value
+                            //These are the Logic Function(s)
+                            function generateNumbers(sValue, eValue) {
+                            
+                                let numbers = [];
+                            
+                                //we want to get all from start to end
+                            
+                                for(let index = sValue; index <= eValue; index++){
+                                    //this will exercute in a loop until index = eValue
+                                    numbers.push(index);
+                                }
+                                return numbers;
+                            }
+                            
+                            //display the numbers and mark the even numbers bold
+                            //display or view function
+                            function displayNumbers(numbers) {
+                            
+                                let templateRows = "";
+                                for (let index = 0; index < numbers.length; index++) {
+                            
+                                    let className = "even";
+                            
+                                    let number = numbers[index];
+                            
+                                    if(number % 2 == 0) {
+                                        className = "even";
+                                    }
+                                    else {
+                                        className = "odd";
+                                    }
+                                    //This code is a template literal string & doesn't render correctly in 
+                                    //Prism, because it has HTML not just JS. Please view source code.  
+                                    templateRows += `<tr><td class="${className}" >${number}</td></tr>`;
+                                }    
+                                document.getElementById("results").innerHTML = templateRows
+                            }                    
+                        </code>
                     </pre>
                 </div>
-                <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
-                </div>
+                <div class="col-lg-4 mt-5">
+                    <h5>The Code Structure for the Evens100 App.</h5>
+                    
+                    <h5>The getNumber() function</h5>
+                    <p>This function gets the start and end values for the app.  The values are Parsed to check they are integers.  If they are integers, this function calls the generateNumbers(), and the displayNumbers() functions.  Otherwise, it displays an alert stating that the input values must be integers.</p>
+                    
+                    <h5>The generateNumbers() function</h5>
+                    <p>This function sets numbers variable to an empty list.  Then it runs a for loop from the startValue to the endValue input by the user. The numbers are pushed into the numbers list.
+                    When done, it returns the numbers list to the getNumber() function.</p>
+                    
+                    <h5>The displayNumbers() function</h5>
+                    <p>This function runs a for loop from 0 to the length of the numbers list, to show a row in the results table for each value in the numbers list.  Checks if the each of the numbers are even or odd. If it is even, it calls the class "even" which changes the font weight to display the number in bold, else it sets the classname to "odd". It adds the number formatted in html to a template literal string called templateRows, it adds this completed string into a table in HTML to be displayed.</p>
             </div>
-
         </div>
     </main>
     <!-- ===== Footer Section ===== -->
@@ -84,7 +147,6 @@
                     <div class="row">
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-linkedin fa-2x"></i></a></div>
                         <div class="col social"><a href="#" target="_blank"><i class="fab fa-github fa-2x"></i></a></div>
-                        <div class="col social"><a href="#" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></div>
                     </div>
                 </div>
             </div>
